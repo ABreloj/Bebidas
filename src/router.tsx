@@ -7,9 +7,10 @@ export default function AppRouter(){
     return (
         <BrowserRouter>
             <Routes>
-                <Route element={ <Layout />} />
+                <Route element={ <Layout />} >
                 <Route path="/" element= { <HomePAGE/> } />
                 <Route path="Favoritos/" element= { <FavoritePage/> } />
+                </Route>
             </Routes>
         </BrowserRouter>
     )
