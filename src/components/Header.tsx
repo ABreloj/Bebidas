@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { ChangeEvent, useMemo, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 
 export default function Header() {
@@ -7,8 +7,22 @@ export default function Header() {
 
     const isHome = useMemo(() => pathname === '/' , [pathname])
 
+    const [searchFilter, setSearchFilters] = useState({
+        ingredient: '',
+        category: ''
+    })
+
+    function handleChange(e: ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>){
+        setSearchFilters({
+            ...searchFilter, [e.target.name]: e.target.value
+        })
+    
+    }
+
+
+
   return (
-    <header className="bg-slate-800">
+    <header className={ isHome ? 'bg-header bg-center bg-cover' : 'bg-state-801' }>
         <div className="mx-auto container px-5 py-12">
             <div className="flex justify-between items-center">
                 <div>
@@ -32,11 +46,11 @@ export default function Header() {
             { isHome && (
                 <form className="md:w-1/2 2x1:w-1/3 bg-orange-500 my-32 p-11 round" >
                     <div className="space-y-4">
-                        <label htmlFor="ingredient" className="block text-white uppercase font-extrabold text-lg">
+                        <label htmlFor="ingredient"  className="block text-white uppercase font-extrabold text-lg">
                             Name o Ingredients 
                         </label>
 
-                        <input id="ingredients" type="text" name="ingredients" className='p-3 w-full rounded-lg focus:outline-none' placeholder='Nombre o Ingredientes. Ej. La Cocacola'/>
+                        <input id="ingredients" onChange={handleChange} value={searchFilter.ingredient}  type="text" name="ingredients" className='p-3 w-full rounded-lg focus:outline-none' placeholder='Nombre o Ingredientes. Ej. La Cocacola'/>
 
                     </div>
                     <div className="space-y-4">
@@ -44,10 +58,10 @@ export default function Header() {
                             La categoria 
                         </label>
 
-                        <select id="ingredients" name="category" className='p-3 w-full rounded-lg focus:outline-none'>
+                        <select id="ingredients" name="category" onChange={handleChange} value={searchFilter.category} className='p-3 w-full rounded-lg focus:outline-none'>
                             <option value="">Selecionar aqui</option>
                         </select>
-
+                                     
                     </div>
 
                     <input type='submit' value='Buscar Recetas' className="cursor-pointer bg-orange-800 hover:bg-orange-900 text-white font-extrabold w-full p-2 rounded-lg uppercase" />   
