@@ -1,7 +1,17 @@
-import { ChangeEvent, useMemo, useState } from "react";
+import { ChangeEvent, useEffect, useMemo, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
+import { usepAppStore } from "../sotres/useAppStore";
 
 export default function Header() {
+
+        const categories = usepAppStore((state) => state.categories)
+    
+    
+        const fetchCategories = usepAppStore((state) => state.fetchCategories)
+
+        useEffect(() => {
+            fetchCategories()
+        }, []) 
 
     const { pathname } = useLocation()
 
@@ -59,7 +69,16 @@ export default function Header() {
                         </label>
 
                         <select id="ingredients" name="category" onChange={handleChange} value={searchFilter.category} className='p-3 w-full rounded-lg focus:outline-none'>
-                            <option value="">Selecionar aqui</option>
+                            <option value="">Seleccionar </option>
+                            {  
+                                  categories.drinks.map(category => (
+                                    <option
+                                    value={category.strCategory}
+                                    key={category.strCategory}>
+                                        {category.strCategory}
+                                </option>
+                                 ))
+                                }
                         </select>
                                      
                     </div>
