@@ -1,11 +1,25 @@
-import { ChangeEvent, useEffect, useMemo, useState } from "react";
+import { ChangeEvent, useEffect, useMemo, useState, FormEvent } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { usepAppStore } from "../sotres/useAppStore";
 
 export default function Header() {
 
         const categories = usepAppStore((state) => state.categories)
-    
+
+        const searchRecipes = usepAppStore((state) => state.searchRecipes)
+        
+        const handleSubmit = (e: FormEvent<HTMLFormElement>) =>{
+            e.preventDefault()
+
+            if(Object.values(searchFilter).includes('')){
+                console.log('Campos obligatorios cabeza de tabla')
+                return
+
+            }
+            
+            searchRecipes(searchFilter)
+
+        }    
     
         const fetchCategories = usepAppStore((state) => state.fetchCategories)
 
@@ -54,7 +68,8 @@ export default function Header() {
             </div>
 
             { isHome && (
-                <form className="md:w-1/2 2x1:w-1/3 bg-orange-500 my-32 p-11 round" >
+                <form className="md:w-1/2 2x1:w-1/3 bg-orange-500 my-32 p-11 round" onSubmit={handleSubmit}>
+
                     <div className="space-y-4">
                         <label htmlFor="ingredient"  className="block text-white uppercase font-extrabold text-lg">
                             Name o Ingredients 

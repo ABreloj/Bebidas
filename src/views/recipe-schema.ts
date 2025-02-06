@@ -7,3 +7,9 @@ import { z } from 'zod'
             })
         )
     })
+
+
+export const SearchFilterSchema = z.object({
+    ingredients: z.string(),
+    category: z.string()
+})
