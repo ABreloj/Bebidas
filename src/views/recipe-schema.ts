@@ -10,6 +10,18 @@ import { z } from 'zod'
 
 
 export const SearchFilterSchema = z.object({
-    ingredients: z.string(),
+    ingredient: z.string(),
     category: z.string()
 })
+
+
+export const RecipesAPIResponseSchema = z.object({
+    drinks: z.array(
+        z.object({
+            idDrink: z.string(),
+            strDrink: z.string(),
+            strDrinkThumb: z.string()
+        })
+    )
+})
+

@@ -4,6 +4,10 @@ import { usepAppStore } from "../sotres/useAppStore";
 
 export default function Header() {
 
+       
+
+
+
         const categories = usepAppStore((state) => state.categories)
 
         const searchRecipes = usepAppStore((state) => state.searchRecipes)
@@ -75,7 +79,7 @@ export default function Header() {
                             Name o Ingredients 
                         </label>
 
-                        <input id="ingredients" onChange={handleChange} value={searchFilter.ingredient}  type="text" name="ingredients" className='p-3 w-full rounded-lg focus:outline-none' placeholder='Nombre o Ingredientes. Ej. La Cocacola'/>
+                        <input id="ingredient" onChange={handleChange} value={searchFilter.ingredient}  type="text" name="ingredient" className='p-3 w-full rounded-lg focus:outline-none' placeholder='Nombre o Ingredientes. Ej. La Cocacola'/>
 
                     </div>
                     <div className="space-y-4">
@@ -83,7 +87,7 @@ export default function Header() {
                             La categoria 
                         </label>
 
-                        <select id="ingredients" name="category" onChange={handleChange} value={searchFilter.category} className='p-3 w-full rounded-lg focus:outline-none'>
+                        <select id="category" name="category" onChange={handleChange} value={searchFilter.category} className='p-3 w-full rounded-lg focus:outline-none'>
                             <option value="">Seleccionar </option>
                             {  
                                   categories.drinks.map(category => (
