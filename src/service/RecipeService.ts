@@ -19,6 +19,6 @@ export async function getRecipes(f: SearchFilter){
     const { data } = await axios(`${ url }c=${ f.category}&i={ f.ingredient }` )
     const result = RecipesAPIResponseSchema.safeParse(data)
     if(result.success){
-        result.data
+        return result.data
     }
 }
