@@ -1,13 +1,36 @@
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
 import { usepAppStore } from '../sotres/useAppStore';
+import { Recipe } from '../types';
 
 export default function Modal() {
   const modal = usepAppStore(state => state.modal)
+  const closeModal = usepAppStore(state => state.closeModal)
+  const selectedRecipe = usepAppStore(state => state.selectedRecipe)
+
+  const addFavorites = usepAppStore(state => state.addFavorites)
+  const recipeExist = usepAppStore(state => state.recipeExist)
+  
+  function renderIngredient(){
+    const ingredients: JSX.Element[] = []
+    for(let i = 1; i <= 6; i++){
+      const ingredient = selectedRecipe[`strIngredient${i}` as keyof Recipe]
+      const measure = selectedRecipe[`strMeasure${i}` as keyof Recipe]
+      if(ingredient && measure){
+        ingredients.push(
+          <li key={i}>{ingredient}-{measure}</li>
+        )
+      }
+      
+    }
+    return ingredients
+  }
+
+
   return (
     <>
       <Transition appear show={modal} as={Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={() => {}}>
+        <Dialog as="div" className="relative z-10" onClose={closeModal}>
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -33,14 +56,34 @@ export default function Modal() {
               >
                 <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-2xl sm:p-6" >
                   <Dialog.Title as="h3" className="text-gray-900 text-4xl font-extrabold my-5 text-center">
-                      Titulo Aquí
+                  { selectedRecipe.strDrink }
+                  <img 
+                  className='w-96 mx-auto'
+                  src= { selectedRecipe.strDrinkThumb } 
+                  alt="" />
                   </Dialog.Title>
                   <Dialog.Title as="h3" className="text-gray-900 text-2xl font-extrabold my-5">
-                    Ingredientes y Cantidades
+                    {renderIngredient()}
                   </Dialog.Title>
                   <Dialog.Title as="h3" className="text-gray-900 text-2xl font-extrabold my-5">
                     Instrucciones
                   </Dialog.Title>
+                  <p className='text-lg'> { selectedRecipe.strInstructions }</p> 
+                  <div>
+                  <button 
+                  
+                  className='w-full p-3 uppercase rounded bg-gray-400 hover:bg-gray-550' text-white font-bold
+                  type="button">Cerrar</button>
+                  <button 
+                  onClick={() => {addFavorites(selectedRecipe)}}
+                  
+                  className='w-full p-3 uppercase rounded bg-orange-400 hover:bg-orange-550' text-white font-bold
+                  type="button">{
+                    recipeExist(selectedRecipe.idDrink) ?
+                    'Eliminar de ':
+                    'Agregar a '
+                  }</button>
+                  </div>
                 </Dialog.Panel>
               </Transition.Child>
             </div>
