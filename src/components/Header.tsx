@@ -72,14 +72,14 @@ export default function Header() {
             </div>
 
             { isHome && (
-                <form className="md:w-1/2 2x1:w-1/3 bg-purple-500 my-32 p-11 round" onSubmit={handleSubmit}>
+                <form className="md:w-1/2 2x1:w-1/3 bg-purple-500 my-32 p-11 round shadow-lg border-4 border-purple-900 rounded-xl " onSubmit={handleSubmit}>
 
                     <div className="space-y-4">
-                        <label htmlFor="ingredient"  className="block text-white uppercase font-extrabold text-lg">
+                        <label htmlFor="ingredient"  className="block text-white uppercase font-extrabold text-lg ">
                             Name o Ingredients 
                         </label>
 
-                        <input id="ingredient" onChange={handleChange} value={searchFilter.ingredient}  type="text" name="ingredient" className='p-3 w-full rounded-lg focus:outline-none' placeholder='Nombre o Ingredientes. Ej. La Cocacola'/>
+                        <input id="ingredient" onChange={handleChange} value={searchFilter.ingredient}  type="text" name="ingredient" className='p-3 w-full rounded-lg focus:outline-none border-4 border-purple-900' placeholder='Nombre o Ingredientes. Ej. La Cocacola'/>
 
                     </div>
                     <div className="space-y-4">
@@ -87,7 +87,7 @@ export default function Header() {
                             La categoria 
                         </label>
 
-                        <select id="category" name="category" onChange={handleChange} value={searchFilter.category} className='p-3 w-full rounded-lg focus:outline-none'>
+                        <select id="category" name="category" onChange={handleChange} value={searchFilter.category} className='p-3 w-full rounded-lg focus:outline-none border-4 border-purple-900'>
                             <option value="">Seleccionar </option>
                             {  
                                   categories.drinks.map(category => (
@@ -102,7 +102,7 @@ export default function Header() {
                                      
                     </div>
 
-                    <input type='submit' value='Buscar Recetas' className="cursor-pointer bg-orange-800 hover:bg-orange-900 text-white font-extrabold w-full p-2 rounded-lg uppercase" />   
+                    <input type='submit' value='Buscar Recetas' className="cursor-pointer border-4 border-orange-900 shadow  bg-orange-500 hover:bg-orange-900 text-white font-extrabold w-full p-2  uppercase rounded-full" />   
 
                 </form>
             )}

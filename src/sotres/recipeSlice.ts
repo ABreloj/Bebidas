@@ -55,7 +55,9 @@ export const createRecipesSlice : StateCreator<RecipesSliceType> = (set) =>  ({
         set ({
             modal:false
         })
-    }
+    },
+
+    
 
 
 })
