@@ -1,19 +1,19 @@
 import { useMemo } from "react"
-import { usepAppStore } from "../sotres/useAppStore"
+import { useAppStore } from "../sotres/useAppStore"
 import DrinkCard from "../components/DrinkCard"
 
 export default function FavoritePage(){
 
-    const favorites = usepAppStore(state => state.favorites)
+    const favorites = useAppStore(state => state.favorites)
     const hasFavorites = useMemo(()=> favorites.length > 0, [favorites])
 
     return(
             <>
-                <h1 className="text-6xl font-extrabold">Pagina Home</h1>
+                <h1 className="text-6xl font-extrabold bg-purple-600 ">Pagina Home
             
             {
             hasFavorites ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 my-10 gap-10">
+                <div className="grid grid-cols-4 md:grid-cols-4 2xl:grid-cols-4 my-10 gap-10 ">
                 
                     {
                         favorites.map(drink => (
@@ -27,6 +27,7 @@ export default function FavoritePage(){
             )
                
             }
+            </h1>
              </>
         )
     

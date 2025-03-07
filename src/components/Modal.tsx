@@ -1,15 +1,15 @@
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
-import { usepAppStore } from '../sotres/useAppStore';
+import { useAppStore } from '../sotres/useAppStore';
 import { Recipe } from '../types';
 
 export default function Modal() {
-  const modal = usepAppStore(state => state.modal)
-  const closeModal = usepAppStore(state => state.closeModal)
-  const selectedRecipe = usepAppStore(state => state.selectedRecipe)
+  const modal = useAppStore(state => state.modal)
+  const closeModal = useAppStore(state => state.closeModal)
+  const selectedRecipe = useAppStore(state => state.selectedRecipe)
 
-  const addFavorites = usepAppStore(state => state.addFavorites)
-  const recipeExist = usepAppStore(state => state.recipeExist)
+  const addFavorites = useAppStore(state => state.addFavorites)
+  const recipeExist = useAppStore(state => state.recipeExist)
   
   function renderIngredient(){
     const ingredients: JSX.Element[] = []
@@ -69,15 +69,15 @@ export default function Modal() {
                     Instrucciones
                   </Dialog.Title>
                   <p className='text-lg'> { selectedRecipe.strInstructions }</p> 
-                  <div>
+                  <div className='flex justify-between gap-4'>
                   <button 
-                  
+                  onClick={closeModal}
                   className='w-full p-3 uppercase rounded bg-gray-400 hover:bg-gray-550' text-white font-bold
                   type="button">Cerrar</button>
                   <button 
                   onClick={() => {addFavorites(selectedRecipe)}}
                   
-                  className='w-full p-3 uppercase rounded bg-orange-400 hover:bg-orange-550' text-white font-bold
+                  className='w-full p-3 uppercase rounded bg-purple-400 hover:bg-purple-550' text-white font-bold
                   type="button">{
                     recipeExist(selectedRecipe.idDrink) ?
                     'Eliminar de ':

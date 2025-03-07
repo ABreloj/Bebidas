@@ -1,9 +1,9 @@
 import { useMemo } from "react"
-import { usepAppStore } from "../sotres/useAppStore"
+import { useAppStore } from "../sotres/useAppStore"
 import DrinkCard from "../components/DrinkCard"
 
 export default function HomePAGE(){
-    const recipes = usepAppStore((state) => state.recipes)
+    const recipes = useAppStore((state) => state.recipes)
 
     const hasRecipes = useMemo(() =>recipes.drinks.length > 0 , [recipes])
 
@@ -13,7 +13,7 @@ export default function HomePAGE(){
         
         {
         hasRecipes ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 my-10 gap-10">
+            <div className="grid grid-cols-1 md:grid-cols-1 2xl:grid-cols-4 my-10 gap-10">
             
                 {
                     recipes.drinks.map(drink => (

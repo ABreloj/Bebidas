@@ -1,4 +1,4 @@
-import { usepAppStore } from "../sotres/useAppStore"
+import { useAppStore } from "../sotres/useAppStore"
 import { Drink } from "../types"
 
 type DrinkCardProps = {
@@ -7,7 +7,7 @@ type DrinkCardProps = {
 
 export default function DrinkCard({ drink }: DrinkCardProps) {
   
-    const selectRecipe = usepAppStore((state) => state.selectRecipe)
+    const selectRecipe = useAppStore((state) => state.selectRecipe)
   
     return (
         <div className="border shadow-lg">
@@ -24,7 +24,7 @@ export default function DrinkCard({ drink }: DrinkCardProps) {
             </h2>
             <button
                 type="button"
-                className="bg-orange-400 hover:bg-orange-500 mt-5 w-full p-3 font-bold text-white text-lg"
+                className="bg-purple-400 purple:bg-orange-500 mt-5 w-full p-3 font-bold text-white text-lg"
                 onClick={() => selectRecipe(drink.idDrink)}
                 >Ver Receta</button>
         </div>
